@@ -159,7 +159,7 @@ export default function PredictPage() {
       }))
 
       // Call backend API
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/predictions/predict`, {
+      const response = await fetch('https://healthpredict-production.up.railway.app/predictions/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

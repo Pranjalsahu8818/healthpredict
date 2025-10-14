@@ -3,18 +3,12 @@
 import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { 
-  Stethoscope,
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  Send,
-  CheckCircle2,
-  Home
-} from 'lucide-react'
-import Link from 'next/link'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 import toast from 'react-hot-toast'
+import { getApiUrl } from '@/lib/api-config'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -41,7 +35,7 @@ export default function ContactPage() {
     setSubmitting(true)
     
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact/submit`, {
+      const response = await fetch(getApiUrl('/contact/submit'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

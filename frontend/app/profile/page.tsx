@@ -5,29 +5,12 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import {
-  User,
-  Mail,
-  Calendar,
-  Shield,
-  Edit,
-  Save,
-  X,
-  Lock,
-  Activity,
-  TrendingUp,
-  FileText,
-  Award,
-  CheckCircle,
-  AlertCircle,
-  Eye,
-  EyeOff,
-  Camera,
-  Settings,
-  Bell,
-  Trash2
-} from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { User, Mail, Calendar, Activity, TrendingUp, AlertCircle } from 'lucide-react'
 import toast from 'react-hot-toast'
+import { getApiUrl } from '@/lib/api-config'
 
 export default function ProfilePage() {
   const { user, loading, logout } = useAuth()
@@ -83,7 +66,7 @@ export default function ProfilePage() {
 
       if (!token) return
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/predictions/stats/summary`, {
+      const response = await fetch(getApiUrl('/predictions/stats/summary'), {
         headers: { 'Authorization': `Bearer ${token}` }
       })
 
