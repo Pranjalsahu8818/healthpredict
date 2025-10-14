@@ -9,13 +9,14 @@ import {
   Activity, 
   AlertCircle, 
   CheckCircle2,
-  Stethoscope,
   ArrowLeft,
   TrendingUp,
   Shield,
-  User as UserIcon,
-  FileText,
-  X
+  Clock,
+  Brain,
+  Search,
+  Plus,
+  Minus
 } from 'lucide-react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js'
 import { Pie, Bar } from 'react-chartjs-2'
@@ -292,7 +293,7 @@ export default function PredictPage() {
               </Button>
             </div>
             <div className="flex items-center space-x-3">
-              <Stethoscope className="h-8 w-8 text-blue-600" />
+              <div className="h-8 w-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">H</div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900">Disease Prediction</h1>
                 <p className="text-xs text-gray-600">AI-Powered Health Analysis</p>
