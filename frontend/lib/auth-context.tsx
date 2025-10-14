@@ -63,7 +63,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://healthpredict-production.up.railway.app';
+      console.log('Using API URL:', apiUrl);
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +93,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://healthpredict-production.up.railway.app';
+      console.log('Using API URL for register:', apiUrl);
+      const response = await fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
