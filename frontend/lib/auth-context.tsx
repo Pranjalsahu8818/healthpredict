@@ -84,7 +84,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     } catch (error) {
       console.error('Login error:', error)
-      toast.error('Cannot connect to server. Please ensure backend is running on http://127.0.0.1:8000')
+      toast.error('Cannot connect to server. Please check your internet connection.')
       return false
     }
   }
@@ -112,7 +112,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     } catch (error) {
       console.error('Registration error:', error)
-      toast.error('Cannot connect to server. Please ensure backend is running on http://127.0.0.1:8000')
+      toast.error('Cannot connect to server. Please check your internet connection.')
       return false
     }
   }
