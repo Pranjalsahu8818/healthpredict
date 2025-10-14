@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return
       }
 
-      const response = await fetch(getApiUrl('/auth/me'), {
+      const response = await fetch('https://healthpredict-production.up.railway.app/auth/me', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -64,7 +64,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      const response = await fetch(getApiUrl('/auth/login'), {
+      console.log('Login attempt - using URL:', 'https://healthpredict-production.up.railway.app/auth/login');
+      const response = await fetch('https://healthpredict-production.up.railway.app/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +93,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
-      const response = await fetch(getApiUrl('/auth/register'), {
+      console.log('Register attempt - using URL:', 'https://healthpredict-production.up.railway.app/auth/register');
+      const response = await fetch('https://healthpredict-production.up.railway.app/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
