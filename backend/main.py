@@ -56,7 +56,24 @@ async def root():
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "message": "API is running"}
+    try:
+        # Test database connection
+        from app.database import SessionLocal
+        db = SessionLocal()
+        db.execute("SELECT 1")
+        db.close()
+        return {
+            "status": "healthy", 
+            "message": "API is running",
+            "database": "connected"
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy", 
+            "message": "API is running but database connection failed",
+            "database": "disconnected",
+            "error": str(e)
+        }
 
 # Ensure CORS preflight always succeeds during development
 @app.options("/{rest_of_path:path}")

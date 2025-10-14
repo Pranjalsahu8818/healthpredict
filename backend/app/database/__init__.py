@@ -11,6 +11,13 @@ DATABASE_URL = config(
     default="sqlite:///./healthpredict.db"
 )
 
+# Debug: Print database URL (without credentials)
+if DATABASE_URL.startswith("postgresql"):
+    print(f"Using PostgreSQL database: {DATABASE_URL[:20]}...")
+else:
+    print(f"Using database: {DATABASE_URL}")
+    print("WARNING: Not using PostgreSQL in production!")
+
 engine = create_engine(
     DATABASE_URL,
     connect_args={"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
