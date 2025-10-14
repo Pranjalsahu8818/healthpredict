@@ -128,7 +128,7 @@ export default function AnalyticsPage() {
     datasets: [{
       data: [
         analyticsData?.stats?.high_risk_alerts || 0,
-        (Object.values(analyticsData?.stats?.risk_level_distribution || {}) as number[]).reduce((a: number, b: number) => a + b, 0) - (analyticsData?.stats?.high_risk_alerts || 0),
+        0, // Temporarily disabled for deployment
         analyticsData?.stats?.total_predictions || 0
       ],
       backgroundColor: ['#EF4444', '#F59E0B', '#10B981'],
