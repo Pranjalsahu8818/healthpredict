@@ -74,18 +74,17 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Stethoscope className="h-8 w-8 text-blue-600" />
+              <div className="h-8 w-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">H</div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">HealthPredict</h1>
                 <p className="text-sm text-gray-600">Contact Us</p>
               </div>
             </div>
-            <Link href="/">
+            <a href="/">
               <Button variant="outline" size="sm">
-                <Home className="h-4 w-4 mr-2" />
                 Home
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </header>
@@ -296,7 +295,6 @@ export default function ContactPage() {
                       </>
                     ) : (
                       <>
-                        <Send className="mr-2 h-5 w-5" />
                         Send Message
                       </>
                     )}
@@ -339,7 +337,7 @@ export default function ContactPage() {
           <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
             <CardContent className="py-8">
               <div className="flex items-start space-x-4">
-                <CheckCircle2 className="h-8 w-8 text-green-600 flex-shrink-0 mt-1" />
+                <div className="h-8 w-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 mt-1">✓</div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
                     Need Immediate Assistance?
@@ -349,16 +347,16 @@ export default function ContactPage() {
                     HealthPredict is not a substitute for professional medical advice.
                   </p>
                   <div className="flex flex-wrap gap-3">
-                    <Link href="/about">
+                    <a href="/about">
                       <Button variant="outline" className="bg-white">
                         Learn More About Us
                       </Button>
-                    </Link>
-                    <Link href="/auth/register">
+                    </a>
+                    <a href="/auth/register">
                       <Button className="bg-green-600 hover:bg-green-700">
                         Get Started Free
                       </Button>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
