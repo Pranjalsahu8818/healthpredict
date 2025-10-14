@@ -4,7 +4,7 @@ const nextConfig = {
     domains: ['localhost'],
   },
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://healthpredict-production.up.railway.app',
+    NEXT_PUBLIC_API_URL: 'https://healthpredict-production.up.railway.app',
   },
   typescript: {
     // Skip TypeScript errors during build for deployment
