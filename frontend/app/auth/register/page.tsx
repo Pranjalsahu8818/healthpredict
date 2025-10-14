@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Stethoscope, Eye, EyeOff, Check, X } from 'lucide-react'
+import { Eye, EyeOff, Check, X } from 'lucide-react'
 import { validateEmail, validatePassword } from '@/lib/utils'
 
 export default function RegisterPage() {
@@ -91,7 +91,7 @@ export default function RegisterPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
-            <Stethoscope className="h-12 w-12 text-blue-600" />
+            <div className="h-12 w-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">H</div>
           </div>
           <h1 className="text-2xl font-bold text-gray-900">HealthPredict</h1>
           <p className="text-gray-600">Create your account</p>
