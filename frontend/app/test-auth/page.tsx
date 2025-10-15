@@ -8,11 +8,21 @@ export default function TestAuthPage() {
 
   const testRegister = async () => {
     setLoading(true)
-    setResult('Testing...')
+    setResult('Testing registration...')
     
     try {
       console.log('Testing registration endpoint...')
       
+      // First test if we can reach the health endpoint
+      const healthResponse = await fetch('https://healthpredict-production.up.railway.app/health')
+      console.log('Health check status:', healthResponse.status)
+      
+      if (!healthResponse.ok) {
+        setResult('BACKEND DOWN: Health check failed with status ' + healthResponse.status)
+        return
+      }
+      
+      // Now test registration
       const response = await fetch('https://healthpredict-production.up.railway.app/auth/register', {
         method: 'POST',
         headers: {
@@ -25,21 +35,31 @@ export default function TestAuthPage() {
         })
       })
       
-      console.log('Response status:', response.status)
-      console.log('Response ok:', response.ok)
+      console.log('Registration response status:', response.status)
+      console.log('Registration response ok:', response.ok)
+      console.log('Response headers:', Object.fromEntries(response.headers))
       
-      const data = await response.json()
-      console.log('Response data:', data)
+      const responseText = await response.text()
+      console.log('Raw response:', responseText)
+      
+      let data
+      try {
+        data = JSON.parse(responseText)
+      } catch (e) {
+        data = { raw: responseText }
+      }
       
       if (response.ok) {
-        setResult('SUCCESS: Registration worked! ' + JSON.stringify(data))
+        setResult('SUCCESS: Registration worked!\n' + JSON.stringify(data, null, 2))
       } else {
-        setResult('ERROR: ' + JSON.stringify(data))
+        setResult('ERROR (Status ' + response.status + '):\n' + JSON.stringify(data, null, 2))
       }
       
     } catch (error) {
       console.error('Fetch error:', error)
-      setResult('NETWORK ERROR: ' + error.message)
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+      const errorType = error instanceof Error ? error.constructor.name : typeof error
+      setResult('NETWORK ERROR: ' + errorMessage + '\nError type: ' + errorType)
     } finally {
       setLoading(false)
     }
@@ -54,7 +74,8 @@ export default function TestAuthPage() {
       const data = await response.json()
       setResult('Health check: ' + JSON.stringify(data))
     } catch (error) {
-      setResult('Health check error: ' + error.message)
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+      setResult('Health check error: ' + errorMessage)
     } finally {
       setLoading(false)
     }
