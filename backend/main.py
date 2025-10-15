@@ -29,11 +29,11 @@ app = FastAPI(
 # CORS middleware - Allow all for development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins in development
-    allow_credentials=False,  # Set to False when using wildcard
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=False,  # Must be False with wildcard
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"],  # Expose all headers
+    expose_headers=["*"],
 )
 
 # Security
@@ -76,10 +76,17 @@ async def health_check():
             "error": str(e)
         }
 
-# Ensure CORS preflight always succeeds during development
+# Ensure CORS preflight always succeeds
 @app.options("/{rest_of_path:path}")
 async def cors_preflight(rest_of_path: str):
-    return Response(status_code=200)
+    return Response(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+        }
+    )
 
 # Protected route example
 @app.get("/protected")
