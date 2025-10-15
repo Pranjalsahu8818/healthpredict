@@ -76,8 +76,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (response.ok) {
         const data = await response.json()
+        console.log('Login successful, setting user:', data.user)
         Cookies.set('auth_token', data.access_token, { expires: 7 })
         setUser(data.user)
+        setLoading(false) // Ensure loading is false
         toast.success('Login successful!')
         return true
       } else {
@@ -118,8 +120,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (response.ok) {
         const data = await response.json()
+        console.log('Registration successful, setting user:', data.user)
         Cookies.set('auth_token', data.access_token, { expires: 7 })
         setUser(data.user)
+        setLoading(false) // Ensure loading is false
         toast.success('Registration successful!')
         return true
       } else {

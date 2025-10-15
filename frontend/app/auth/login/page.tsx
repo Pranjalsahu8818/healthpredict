@@ -23,7 +23,10 @@ export default function LoginPage() {
     try {
       const success = await login(email, password)
       if (success) {
-        router.push('/dashboard')
+        // Small delay to ensure auth state is updated
+        setTimeout(() => {
+          router.push('/dashboard')
+        }, 100)
       }
     } finally {
       setLoading(false)

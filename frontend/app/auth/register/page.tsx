@@ -76,7 +76,10 @@ export default function RegisterPage() {
     try {
       const success = await register(formData.name, formData.email, formData.password)
       if (success) {
-        router.push('/dashboard')
+        // Small delay to ensure auth state is updated
+        setTimeout(() => {
+          router.push('/dashboard')
+        }, 100)
       }
     } finally {
       setLoading(false)
