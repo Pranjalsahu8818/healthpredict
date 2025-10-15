@@ -85,22 +85,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return false
       }
     } catch (error) {
-      console.error('Login error:', error)
-      toast.error('Cannot connect to server. Please check your internet connection.')
+      console.error('Login error details:', error)
+      console.error('Error type:', typeof error)
+      console.error('Error message:', error instanceof Error ? error.message : 'Unknown error')
+      
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        toast.error('Network error: Cannot reach server. Check if backend is running.')
+      } else {
+        toast.error('Login failed: ' + (error instanceof Error ? error.message : 'Unknown error'))
+      }
       return false
     }
   }
 
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
-      console.log('Register attempt - using URL:', 'https://healthpredict-production.up.railway.app/auth/register');
-      const response = await fetch('https://healthpredict-production.up.railway.app/auth/register', {
+      const apiUrl = 'https://healthpredict-production.up.railway.app/auth/register';
+      console.log('Register attempt - using URL:', apiUrl);
+      console.log('Request payload:', { name, email, password: '***' });
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, email, password }),
       })
+      
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
 
       if (response.ok) {
         const data = await response.json()
@@ -114,8 +127,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return false
       }
     } catch (error) {
-      console.error('Registration error:', error)
-      toast.error('Cannot connect to server. Please check your internet connection.')
+      console.error('Registration error details:', error)
+      console.error('Error type:', typeof error)
+      console.error('Error message:', error instanceof Error ? error.message : 'Unknown error')
+      
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        toast.error('Network error: Cannot reach server. Check if backend is running.')
+      } else {
+        toast.error('Registration failed: ' + (error instanceof Error ? error.message : 'Unknown error'))
+      }
       return false
     }
   }
